@@ -12,16 +12,6 @@ const getFunction = () => {
     }).then((response) => {
       console.log(response);
       response.json().then((responseData) => {
-        // console.log(responseData);
-        // const appComments = responseData.comments.map((comment) => {
-        //   return {
-        //     name: comment.author.name,
-        //     time: new Date(comment.date),
-        //     commentText: comment.text,
-        //     likes: comment.likes,
-        //     isLiked: false,
-        //   }
-        // });
         commentators = responseData.comments;
         console.log(commentators);
         renderCommentators()
