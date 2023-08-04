@@ -1,34 +1,64 @@
 "use strict";
+
+let isReplay = false;
+
+let loader = false;
+const addForm = document.querySelector('.add-form')
+
+const formRender = () => {
+
+  if (loader) {
+    addForm.innerHTML = `<p>Loading...</p>`
+  } else {
+    addForm.innerHTML = `<input 
+    id="name-input"
+    type="text"
+    class="add-form-name"
+    placeholder="Введите ваше имя"
+  />
+  <!--Сюда будет вводится ИМЯ-->
+  <textarea
+    id="text-input"
+    type="textarea"
+    class="add-form-text"
+    placeholder="Введите ваш коментарий" 
+    rows="4"
+  ></textarea>
+  <!--Сюда будет вводится ТЕКСТ-->
+  <div class="add-form-row">
+    <button id="form-button" class="add-form-button">Написать</button>
+  </div>`;
+    clickEventButton();
+  }
+}
+// formRender();
+
 const formButtonElement = document.getElementById("form-button");
 const commentBlockElement = document.getElementById("comment-block");
 const nameInputElement = document.getElementById("name-input");
 const textInputElement = document.getElementById("text-input");
 
 
+
 const getFunction = () => {
-  fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomanW/comments',
+  loader = true;
+  formRender();
+  fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomant/comments',
     {
       method: 'GET',
     }).then((response) => {
-      console.log(response);
-      response.json().then((responseData) => {
-        // console.log(responseData);
-        // const appComments = responseData.comments.map((comment) => {
-        //   return {
-        //     name: comment.author.name,
-        //     time: new Date(comment.date),
-        //     commentText: comment.text,
-        //     likes: comment.likes,
-        //     isLiked: false,
-        //   }
-        // });
-        commentators = responseData.comments;
-        console.log(commentators);
-        renderCommentators()
-      })
+      return response.json();
+    }).then((responseData) => {
+      commentators = responseData.comments;
+      renderCommentators();
+      loader = false;
+      formRender();
     })
+
 }
-getFunction()
+getFunction();
+
+// const postFunction
 
 const dateInAPI = (dateInAPI) => {
   const myDate = dateInAPI;
@@ -55,22 +85,8 @@ const dateInAPI = (dateInAPI) => {
   return fullDate;
 };
 
-let commentators = [
-  // {
-  //     name: 'Глеб Фокин',
-  //     commentText: 'Это будет первый комментарий на этой странице',
-  //     time: '12.02.22 12:18',
-  //     likes: 3,
-  //     isLiked: false,
-  // },
-  // {
-  //     name: 'Варвара Н.',
-  //     commentText: 'Мне нравится как оформлена эта страница! ❤',
-  //     time: '13.02.22 19:22',
-  //     likes: 3,
-  //     isLiked: false,
-  // }
-];
+let commentators = [];
+
 
 const likeMaker = () => {
   const likeButtonElements = document.querySelectorAll('.like-button');
@@ -95,10 +111,10 @@ const likeMaker = () => {
 const replyТoСomment = () => {
   const commentElements = document.querySelectorAll('.comment');
   commentElements.forEach((commentElement) => {
-    commentElement.addEventListener('click', (event) => {
+    commentElement.addEventListener('click', () => {
       const index = commentElement.dataset.index;
-      console.log(index);
-      const person = commentators[index]
+      const person = commentators[index];
+      const textInputElement = document.getElementById("text-input");
       textInputElement.value = `> ${person.text} \n \n  ${person.author.name},`;
     })
   })
@@ -142,34 +158,37 @@ const renderCommentators = () => {
 
 renderCommentators()
 
+function clickEventButton() {
+  const formButtonElement = document.getElementById("form-button");
+  const nameInputElement = document.getElementById("name-input");
+  const textInputElement = document.getElementById("text-input");
+  // 
+  formButtonElement.addEventListener("click", () => {
+    nameInputElement.classList.remove("error");
+    if (nameInputElement.value === "") {
+      nameInputElement.classList.add("error");
+      return;
+    }
+    textInputElement.classList.remove("error");
+    if (textInputElement.value === "") {
+      textInputElement.classList.add("error");
+      return;
+    }
 
-formButtonElement.addEventListener("click", () => {
-  nameInputElement.classList.remove("error");
-  if (nameInputElement.value === "") {
-    nameInputElement.classList.add("error");
-    return;
-  }
-  textInputElement.classList.remove("error");
-  if (textInputElement.value === "") {
-    textInputElement.classList.add("error");
-    return;
-  }
-
-  fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomanW/comments',
-    {
+    fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomant/comments', {
       method: 'POST',
       body: JSON.stringify({
         name: nameInputElement.value,
-        text: textInputElement.value,  //Вопрос: почему API принимает любые названия ключей в объекте комментаторов, и выводит корректный результат?
-        datе: new Date(),
+        text: textInputElement.value,
       })
     }).then((response) => {
-      response.json().then((responseData) => {
-        commentators = responseData.comment;
-        getFunction();
+      return response.json();
+    }).then((responseData) => {
+      commentators = responseData.comment;
+      getFunction();
 
-      });
-    })
-  renderCommentators()
-});
+    });
+  });
+}
+
 
