@@ -62,10 +62,10 @@ const getFunction = () => {
       // alert('Кажется у Вас пропал интернет');
       if (error.message === 'NetworkError when attempting to fetch resource.') {
         alert('Кажется, у Вас пропал интернет, обновите страницу позже.')
-        if (error.message === 'error') {
-          alert('Что то пошло не так, обновите страницу')
-        }
-      }
+      };
+      if (error.message === 'error') {
+        alert('Что то пошло не так, обновите страницу')
+      };
     })
 
 }
