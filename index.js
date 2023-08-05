@@ -47,17 +47,68 @@ const getFunction = () => {
     {
       method: 'GET',
     }).then((response) => {
-      return response.json();
+      if (response.status != 200) {
+        throw new Error('error')
+      } else {
+        return response.json();
+      }
     }).then((responseData) => {
       commentators = responseData.comments;
       renderCommentators();
       loader = false;
       formRender();
+    }).catch((error) => {
+      console.warn(error)
+      // alert('Кажется у Вас пропал интернет');
+      if (error.message === 'NetworkError when attempting to fetch resource.') {
+        alert('Кажется, у Вас пропал интернет, обновите страницу позже.')
+        if (error.message === 'error') {
+          alert('Что то пошло не так, обновите страницу')
+        }
+      }
     })
 
 }
 getFunction();
 
+function postFunction() {
+  const nameInputElement = document.getElementById("name-input");
+  const textInputElement = document.getElementById("text-input");
+  fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomant/comments', {
+    method: 'POST',
+    body: JSON.stringify({
+      name: nameInputElement.value,
+      text: textInputElement.value,
+      forceError: true,
+    })
+  }).then((response) => {
+    console.log(response.type);
+    if (response.status === 400) {
+      throw new Error('< 2 sumb')
+    } else if (response.status === 500) {
+      throw new Error('server fall')
+    } else {
+      return response.json();
+    }
+  }).then((responseData) => {
+    commentators = responseData.comment;
+    getFunction();
+  }).catch((error) => {
+    console.warn(error)
+    if (error.message === 'NetworkError when attempting to fetch resource.') {
+      alert('Кажется, у Вас пропал интернет, обновите страницу позже.')
+    };
+    if (error.message === '< 2 sumb') {
+      alert('Вы ввели слишком короткое имя либо комментарий');
+      nameInputElement.classList.add("error");
+      textInputElement.classList.add('error')
+    };
+    if (error.message === 'server fall') {
+      alert('Сервер сломался, попробуй позже');
+      postFunction()
+    }
+  });
+};
 // const postFunction
 
 const dateInAPI = (dateInAPI) => {
@@ -174,20 +225,7 @@ function clickEventButton() {
       textInputElement.classList.add("error");
       return;
     }
-
-    fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomant/comments', {
-      method: 'POST',
-      body: JSON.stringify({
-        name: nameInputElement.value,
-        text: textInputElement.value,
-      })
-    }).then((response) => {
-      return response.json();
-    }).then((responseData) => {
-      commentators = responseData.comment;
-      getFunction();
-
-    });
+    postFunction()
   });
 }
 
