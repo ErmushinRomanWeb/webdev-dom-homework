@@ -1,6 +1,6 @@
+import { getComments, postComments } from "./api.js";
 "use strict";
 
-let isReplay = false;
 
 let loader = false;
 const addForm = document.querySelector('.add-form')
@@ -43,30 +43,21 @@ const textInputElement = document.getElementById("text-input");
 const getFunction = () => {
   loader = true;
   formRender();
-  fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomant/comments',
-    {
-      method: 'GET',
-    }).then((response) => {
-      if (response.status != 200) {
-        throw new Error('error')
-      } else {
-        return response.json();
+  getComments().then((responseData) => {
+    commentators = responseData.comments;
+    renderCommentators();
+    loader = false;
+    formRender();
+  }).catch((error) => {
+    console.warn(error)
+    // alert('Кажется у Вас пропал интернет');
+    if (error.message === 'NetworkError when attempting to fetch resource.') {
+      alert('Кажется, у Вас пропал интернет, обновите страницу позже.')
+      if (error.message === 'error') {
+        alert('Что то пошло не так, обновите страницу')
       }
-    }).then((responseData) => {
-      commentators = responseData.comments;
-      renderCommentators();
-      loader = false;
-      formRender();
-    }).catch((error) => {
-      console.warn(error)
-      // alert('Кажется у Вас пропал интернет');
-      if (error.message === 'NetworkError when attempting to fetch resource.') {
-        alert('Кажется, у Вас пропал интернет, обновите страницу позже.')
-        if (error.message === 'error') {
-          alert('Что то пошло не так, обновите страницу')
-        }
-      }
-    })
+    }
+  })
 
 }
 getFunction();
@@ -74,23 +65,7 @@ getFunction();
 function postFunction() {
   const nameInputElement = document.getElementById("name-input");
   const textInputElement = document.getElementById("text-input");
-  fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomant/comments', {
-    method: 'POST',
-    body: JSON.stringify({
-      name: nameInputElement.value,
-      text: textInputElement.value,
-      forceError: true,
-    })
-  }).then((response) => {
-    console.log(response.type);
-    if (response.status === 400) {
-      throw new Error('< 2 sumb')
-    } else if (response.status === 500) {
-      throw new Error('server fall')
-    } else {
-      return response.json();
-    }
-  }).then((responseData) => {
+  postComments({name: nameInputElement.value, text: textInputElement.value}).then((responseData) => {
     commentators = responseData.comment;
     getFunction();
   }).catch((error) => {
