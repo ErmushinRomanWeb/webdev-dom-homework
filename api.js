@@ -13,7 +13,7 @@ export function getComments() {
 
 
 export function postComments({name, text}) {
-    fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomant/comments', {
+    return fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomant/comments', {
         method: 'POST',
         body: JSON.stringify({
           name: name,

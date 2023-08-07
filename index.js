@@ -1,53 +1,57 @@
 import { getComments, postComments } from "./api.js";
+import { formRender, commentsRender } from "./render.js";
 "use strict";
 
 
 let loader = false;
 const addForm = document.querySelector('.add-form')
 
-const formRender = () => {
+//ЭОТО ТОЖЕ ПОКА НЕ УДАЛЯЙ, ВОЗМОЖНОПОНАДОБИТСЯ!!!!!
+// formRender(loader, addForm, clickEventButton)
 
-  if (loader) {
-    addForm.innerHTML = `<p>Loading...</p>`
-  } else {
-    addForm.innerHTML = `<input 
-    id="name-input"
-    type="text"
-    class="add-form-name"
-    placeholder="Введите ваше имя"
-  />
-  <!--Сюда будет вводится ИМЯ-->
-  <textarea
-    id="text-input"
-    type="textarea"
-    class="add-form-text"
-    placeholder="Введите ваш коментарий" 
-    rows="4"
-  ></textarea>
-  <!--Сюда будет вводится ТЕКСТ-->
-  <div class="add-form-row">
-    <button id="form-button" class="add-form-button">Написать</button>
-  </div>`;
-    clickEventButton();
-  }
-}
+//ПОКА НЕ УДАЛЯЙ ЭТОТ КОД!!!!!!!
+// const formRender = () => {
+// 
+//   if (loader) {
+//     addForm.innerHTML = `<p>Loading...</p>`
+//   } else {
+//     addForm.innerHTML = `<input 
+//     id="name-input"
+//     type="text"
+//     class="add-form-name"
+//     placeholder="Введите ваше имя"
+//   />
+//   <!--Сюда будет вводится ИМЯ-->
+//   <textarea
+//     id="text-input"
+//     type="textarea"
+//     class="add-form-text"
+//     placeholder="Введите ваш коментарий" 
+//     rows="4"
+//   ></textarea>
+//   <!--Сюда будет вводится ТЕКСТ-->
+//   <div class="add-form-row">
+//     <button id="form-button" class="add-form-button">Написать</button>
+//   </div>`;
+//     clickEventButton();
+//   }
+// }
 // formRender();
 
-const formButtonElement = document.getElementById("form-button");
+
 const commentBlockElement = document.getElementById("comment-block");
-const nameInputElement = document.getElementById("name-input");
-const textInputElement = document.getElementById("text-input");
+
 
 
 
 const getFunction = () => {
   loader = true;
-  formRender();
+  formRender(loader, addForm, clickEventButton);
   getComments().then((responseData) => {
     commentators = responseData.comments;
-    renderCommentators();
+    commentsRender(commentators, dateInAPI, newlikeColor, commentBlockElement, likeMaker, replyТoСomment);
     loader = false;
-    formRender();
+    formRender(loader, addForm, clickEventButton);
   }).catch((error) => {
     console.warn(error)
     // alert('Кажется у Вас пропал интернет');
@@ -124,11 +128,11 @@ const likeMaker = () => {
       if (like.isLiked === false) {
         like.isLiked = true;
         like.likes += 1;
-        renderCommentators()
+        commentsRender(commentators, dateInAPI, newlikeColor, commentBlockElement, likeMaker, replyТoСomment)
       } else {
         like.isLiked = false;
         like.likes -= 1;
-        renderCommentators()
+        commentsRender(commentators,dateInAPI, newlikeColor, commentBlockElement, likeMaker, replyТoСomment)
       }
     })
   })
@@ -158,31 +162,31 @@ const newlikeColor = (element) => {
 
 
 
-const renderCommentators = () => {
-  const commentatorsHtml = commentators.map((commentator, index) => {
-    return `<li data-index="${index}" class="comment">
-        <div class="comment-header">
-          <div>${commentator.author.name}</div>
-          <div>${dateInAPI(new Date(commentator.date))}</div>
-        </div>
-        <div class="comment-body">
-          <div class="comment-text">
-            ${commentator.text}
-          </div>
-        </div>
-        <div class="comment-footer">
-          <div class="likes">
-            <span class="likes-counter">${commentator.likes}</span>
-            <button data-index="${index}" class="${newlikeColor(commentator.isLiked)}"></button>
-          </div>
-        </div>`
-  }).join('');
-  commentBlockElement.innerHTML = commentatorsHtml;
-  likeMaker();
-  replyТoСomment();
-}
+// const commentsRender = () => {
+//   const commentatorsHtml = commentators.map((commentator, index) => {
+//     return `<li data-index="${index}" class="comment">
+//         <div class="comment-header">
+//           <div>${commentator.author.name}</div>
+//           <div>${dateInAPI(new Date(commentator.date))}</div>
+//         </div>
+//         <div class="comment-body">
+//           <div class="comment-text">
+//             ${commentator.text}
+//           </div>
+//         </div>
+//         <div class="comment-footer">
+//           <div class="likes">
+//             <span class="likes-counter">${commentator.likes}</span>
+//             <button data-index="${index}" class="${newlikeColor(commentator.isLiked)}"></button>
+//           </div>
+//         </div>`
+//   }).join('');
+//   commentBlockElement.innerHTML = commentatorsHtml;
+//   likeMaker();
+//   replyТoСomment();
+// }
 
-renderCommentators()
+commentsRender(commentators, dateInAPI, newlikeColor, commentBlockElement, likeMaker, replyТoСomment)
 
 function clickEventButton() {
   const formButtonElement = document.getElementById("form-button");
