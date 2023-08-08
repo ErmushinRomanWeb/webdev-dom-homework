@@ -1,3 +1,5 @@
+import { timeFunction } from "./timeFunction.js";
+
 export function formRender(loader, addForm, clickButtonFunction) {
     if (loader) {
         addForm.innerHTML = `<p>Loading...</p>`
@@ -25,12 +27,12 @@ export function formRender(loader, addForm, clickButtonFunction) {
 }
 
 
-export function commentsRender(commentators, dateInAPI, newlikeColor, commentBlockElement, likeMaker, replyТoСomment) {
+export function commentsRender(commentators, newlikeColor, commentBlockElement, likeMaker, replyТoСomment) {
     const commentatorsHtml = commentators.map((commentator, index) => {
         return `<li data-index="${index}" class="comment">
             <div class="comment-header">
               <div>${commentator.author.name}</div>
-              <div>${dateInAPI(new Date(commentator.date))}</div>
+              <div>${timeFunction(new Date(commentator.date))}</div>
             </div>
             <div class="comment-body">
               <div class="comment-text">
@@ -43,8 +45,8 @@ export function commentsRender(commentators, dateInAPI, newlikeColor, commentBlo
                 <button data-index="${index}" class="${newlikeColor(commentator.isLiked)}"></button>
               </div>
             </div>`
-      }).join('');
-      commentBlockElement.innerHTML = commentatorsHtml;
-      likeMaker();
-      replyТoСomment();
+    }).join('');
+    commentBlockElement.innerHTML = commentatorsHtml;
+    likeMaker();
+    replyТoСomment();
 }
