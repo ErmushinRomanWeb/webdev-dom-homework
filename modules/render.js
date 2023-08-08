@@ -2,13 +2,12 @@ import { timeFunction } from "./timeFunction.js";
 import { likeMaker } from "./likeFunctions.js";
 import { newlikeColor } from "./likeFunctions.js";
 import { replyТoСomment } from "./replyToComments.js";
-import { clickEventButton } from "./clickEventButton.js";
 
-export function formRender(loader, addForm, clickButtonFunction) {
-    if (loader) {
-        addForm.innerHTML = `<p>Loading...</p>`
-    } else {
-        addForm.innerHTML = `<input 
+export function formRender(loader, addForm, clickEventButton) {
+  if (loader) {
+    addForm.innerHTML = `<p>Loading...</p>`
+  } else {
+    addForm.innerHTML = `<input 
         id="name-input"
         type="text"
         class="add-form-name"
@@ -26,13 +25,13 @@ export function formRender(loader, addForm, clickButtonFunction) {
       <div class="add-form-row">
         <button id="form-button" class="add-form-button">Написать</button>
       </div>`;
-        clickButtonFunction();
-    }
+    clickEventButton();
+  }
 }
 
 export function commentsRender(commentators, commentBlockElement) {
-    const commentatorsHtml = commentators.map((commentator, index) => {
-        return `<li data-index="${index}" class="comment">
+  const commentatorsHtml = commentators.map((commentator, index) => {
+    return `<li data-index="${index}" class="comment">
             <div class="comment-header">
               <div>${commentator.author.name}</div>
               <div>${timeFunction(new Date(commentator.date))}</div>
@@ -48,8 +47,8 @@ export function commentsRender(commentators, commentBlockElement) {
                 <button data-index="${index}" class="${newlikeColor(commentator.isLiked)}"></button>
               </div>
             </div>`
-    }).join('');
-    commentBlockElement.innerHTML = commentatorsHtml;
-    likeMaker(commentators, commentBlockElement, replyТoСomment);
-    replyТoСomment(commentators);
+  }).join('');
+  commentBlockElement.innerHTML = commentatorsHtml;
+  likeMaker(commentators, commentBlockElement, replyТoСomment);
+  replyТoСomment(commentators);
 }
