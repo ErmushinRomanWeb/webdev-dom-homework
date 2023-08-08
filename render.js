@@ -1,5 +1,8 @@
 import { timeFunction } from "./timeFunction.js";
 import { likeMaker } from "./likeFunctions.js";
+import { newlikeColor } from "./likeFunctions.js";
+import { replyТoСomment } from "./replyToComments.js";
+import { clickEventButton } from "./clickEventButton.js";
 
 export function formRender(loader, addForm, clickButtonFunction) {
     if (loader) {
@@ -27,8 +30,7 @@ export function formRender(loader, addForm, clickButtonFunction) {
     }
 }
 
-
-export function commentsRender(commentators, newlikeColor, commentBlockElement, replyТoСomment) {
+export function commentsRender(commentators, commentBlockElement) {
     const commentatorsHtml = commentators.map((commentator, index) => {
         return `<li data-index="${index}" class="comment">
             <div class="comment-header">
@@ -48,6 +50,6 @@ export function commentsRender(commentators, newlikeColor, commentBlockElement, 
             </div>`
     }).join('');
     commentBlockElement.innerHTML = commentatorsHtml;
-    likeMaker(commentators, newlikeColor, commentBlockElement, replyТoСomment);
-    replyТoСomment();
+    likeMaker(commentators, commentBlockElement, replyТoСomment);
+    replyТoСomment(commentators);
 }
