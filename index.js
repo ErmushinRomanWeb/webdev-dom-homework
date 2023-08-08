@@ -1,4 +1,5 @@
 import { getComments, postComments } from "./api.js";
+import { likeMaker } from "./likeFunctions.js";
 import { formRender, commentsRender } from "./render.js";
 "use strict";
 
@@ -13,7 +14,7 @@ function getFunction(){
   formRender(loader, addForm, clickEventButton);
   getComments().then((responseData) => {
     commentators = responseData.comments;
-    commentsRender(commentators, newlikeColor, commentBlockElement, likeMaker, replyТoСomment);
+    commentsRender(commentators, newlikeColor, commentBlockElement, replyТoСomment);
     loader = false;
     formRender(loader, addForm, clickEventButton);
   }).catch((error) => {
@@ -55,25 +56,26 @@ function postFunction() {
 
 let commentators = [];
 
-const likeMaker = () => {
-  const likeButtonElements = document.querySelectorAll('.like-button');
-  likeButtonElements.forEach((likeButtonElement) => {
-    likeButtonElement.addEventListener('click', (event) => {
-      event.stopPropagation()
-      const index = likeButtonElement.dataset.index
-      const like = commentators[index];
-      if (like.isLiked === false) {
-        like.isLiked = true;
-        like.likes += 1;
-        commentsRender(commentators, newlikeColor, commentBlockElement, likeMaker, replyТoСomment)
-      } else {
-        like.isLiked = false;
-        like.likes -= 1;
-        commentsRender(commentators, newlikeColor, commentBlockElement, likeMaker, replyТoСomment)
-      }
-    })
-  })
-}
+
+// const likeMaker = () => {
+//   const likeButtonElements = document.querySelectorAll('.like-button');
+//   likeButtonElements.forEach((likeButtonElement) => {
+//     likeButtonElement.addEventListener('click', (event) => {
+//       event.stopPropagation()
+//       const index = likeButtonElement.dataset.index
+//       const like = commentators[index];
+//       if (like.isLiked === false) {
+//         like.isLiked = true;
+//         like.likes += 1;
+//         commentsRender(commentators, newlikeColor, commentBlockElement, likeMaker, replyТoСomment)
+//       } else {
+//         like.isLiked = false;
+//         like.likes -= 1;
+//         commentsRender(commentators, newlikeColor, commentBlockElement, likeMaker, replyТoСomment)
+//       }
+//     })
+//   })
+// }
 
 function replyТoСomment() {
   const commentElements = document.querySelectorAll('.comment');
@@ -96,7 +98,7 @@ const newlikeColor = (element) => {
 }
 
 
-commentsRender(commentators, newlikeColor, commentBlockElement, likeMaker, replyТoСomment)
+commentsRender(commentators, newlikeColor, commentBlockElement, replyТoСomment)
 
 function clickEventButton() {
   const formButtonElement = document.getElementById("form-button");
