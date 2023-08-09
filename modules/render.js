@@ -2,8 +2,9 @@ import { timeFunction } from "./timeFunction.js";
 import { likeMaker } from "./likeFunctions.js";
 import { newlikeColor } from "./likeFunctions.js";
 import { replyТoСomment } from "./replyToComments.js";
+import { clickEventButton } from "./clickEventButton.js";
 
-export function formRender(loader, addForm, clickEventButton) {
+export function formRender(loader, addForm) {
   if (loader) {
     addForm.innerHTML = `<p>Loading...</p>`
   } else {
