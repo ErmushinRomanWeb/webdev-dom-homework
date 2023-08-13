@@ -1,4 +1,4 @@
-import { loginUrl } from "./variables.js";
+import { loginUrl, registrationUrl } from "./variables.js";
 
 export function getComments() {
     return fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomant/comments',
@@ -45,6 +45,25 @@ export function postlogin({ login, password }) {
             return response.json()
         } else if (response.status === 400) {
             throw new Error('wrong login or password')
+        } else {
+            throw new Error('Error')
+        }
+    })
+}
+
+export function postRegistration({login, name, password }) {
+    return fetch (registrationUrl, {
+        method: 'POST',
+        body: JSON.stringify({
+            login,
+            name,
+            password,
+        })
+    }).then((response) => {
+        if (response.status === 201) {
+            return response.json()
+        } else if (response.status === 400) {
+            throw new Error('user already exists')
         } else {
             throw new Error('Error')
         }

@@ -3,7 +3,7 @@ import { likeMaker } from "./likeFunctions.js";
 import { newlikeColor } from "./likeFunctions.js";
 import { replyТoСomment } from "./replyToComments.js";
 import { clickEventButton } from "./clickEventButton.js";
-import { loginProcess } from "./loginPage.js";
+import { loginProcess, registrationProcess } from "./loginPage.js";
 
 export function formRender(loader, addForm) {
   if (loader) {
@@ -59,4 +59,8 @@ export function commentsRender(commentators, commentBlockElement) {
 
 export function renderLoginForm(commentators) {
   loginProcess()
+}
+
+export function renderRegistrationForm(commentators) {
+  registrationProcess()
 }

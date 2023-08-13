@@ -10,6 +10,8 @@ export const appElement = document.getElementById('appElement')
 
 export const loginUrl = 'https://wedev-api.sky.pro/api/user/login';
 
+export const registrationUrl = 'https://wedev-api.sky.pro/api/user'
+
 export let token
 
 export function setVariables(oldVar, newVar) {

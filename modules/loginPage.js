@@ -1,4 +1,4 @@
-import { postlogin } from "./api.js";
+import { postRegistration, postlogin } from "./api.js";
 import { setVariables, token } from "./variables.js";
 
 //Цель: получить из апи регистрации токен, поторым будет подписан каждый запрос.
@@ -23,4 +23,25 @@ export function loginProcess() {
         })
     })
 
+}
+//Object { login: "dsfsd", password: "sdfsdf", name: "dvsd", … }
+export function registrationProcess() {
+    const registerButtonElement = document.getElementById('registerButton');
+    const regNameInputElement = document.getElementById('regNameInput')
+    const regloginInputElement = document.getElementById('regLoginInput');
+    const regpasswordInputElement = document.getElementById('regPasswordInput');
+
+    registerButtonElement.addEventListener('click', () => {
+        postRegistration({
+            login: regloginInputElement.value,
+            name: regNameInputElement.value,
+            password: regpasswordInputElement.value,
+        }).then((responseData) => {
+            console.log(responseData);
+        }).catch((error) => {
+            if (error.message === 'user already exists') {
+                alert('Пользователь уже существует')
+            }
+        })
+    })
 }
