@@ -3,6 +3,7 @@ import { likeMaker } from "./likeFunctions.js";
 import { newlikeColor } from "./likeFunctions.js";
 import { replyТoСomment } from "./replyToComments.js";
 import { clickEventButton } from "./clickEventButton.js";
+import { loginProcess } from "./loginPage.js";
 
 export function formRender(loader, addForm) {
   if (loader) {
@@ -52,4 +53,10 @@ export function commentsRender(commentators, commentBlockElement) {
   commentBlockElement.innerHTML = commentatorsHtml;
   likeMaker(commentators, commentBlockElement, replyТoСomment);
   replyТoСomment(commentators);
+}
+
+
+
+export function renderLoginForm(commentators) {
+  loginProcess()
 }

@@ -1,3 +1,5 @@
+import { loginUrl } from "./variables";
+
 export function getComments() {
     return fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomant/comments',
         {
@@ -27,6 +29,24 @@ export function postComments({ name, text }) {
             throw new Error('server fall')
         } else {
             return response.json();
+        }
+    })
+}
+
+export function postlogin({ login, password }) {
+    return fetch (loginUrl, {
+        method: 'POST',
+        body: JSON.stringify({
+            login,
+            password,
+        })
+    }).then((response) => {
+        if (response.status === 201) {
+            return response.json()
+        } else if (response.status === 400) {
+            throw new Error('wrong login or password')
+        } else {
+            throw new Error('Error')
         }
     })
 }
