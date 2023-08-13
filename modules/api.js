@@ -1,4 +1,4 @@
-import { loginUrl } from "./variables";
+import { loginUrl } from "./variables.js";
 
 export function getComments() {
     return fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomant/comments',

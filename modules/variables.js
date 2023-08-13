@@ -1,18 +1,19 @@
-let loader = false;
+export let loader = false;
 
-const addForm = document.querySelector('.add-form');
+export const addForm = document.querySelector('.add-form');
 
-const commentBlockElement = document.getElementById("comment-block");
+export const commentBlockElement = document.getElementById("comment-block");
 
-let commentators = [];
+export let commentators = [];
 
-const appElement = document.getElementById('appElement')
+export const appElement = document.getElementById('appElement')
 
-const loginUrl = 'https://wedev-api.sky.pro/api/user/login';
+export const loginUrl = 'https://wedev-api.sky.pro/api/user/login';
 
-function setVariables(oldVar, newVar) {
-    oldVar = newVar
+export let token
+
+export function setVariables(oldVar, newVar) {
+    return oldVar = newVar
 }
 
-export { loader, addForm, commentBlockElement, commentators, appElement, loginUrl, setVariables }
 
