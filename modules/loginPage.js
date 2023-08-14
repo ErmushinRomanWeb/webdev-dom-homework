@@ -1,7 +1,7 @@
 import { postRegistration, postlogin } from "./api.js";
 import { setVariables, token } from "./variables.js";
 
-//Цель: получить из апи регистрации токен, поторым будет подписан каждый запрос.
+//Функция выполняет: 1. Переменные, 2. Полученин промиса из postLogin, 3. Получение токена, 4. Добавление токена в свойства объекта для подписи комментария
 export function loginProcess() {
     const loginButtonElement = document.getElementById('loginButton');
     const loginInputElement = document.getElementById('loginInput');
@@ -25,6 +25,7 @@ export function loginProcess() {
 
 }
 //Object { login: "dsfsd", password: "sdfsdf", name: "dvsd", … }
+//Функция выполняет: 1. Переменные, 2. получение промиса из postRegistration, 3. Добавление нового пользователя
 export function registrationProcess() {
     const registerButtonElement = document.getElementById('registerButton');
     const regNameInputElement = document.getElementById('regNameInput')
