@@ -1,5 +1,5 @@
 import { postFunction } from "./postFunction.js";
-import { addForm, commentBlockElement, commentators, loader } from "./variables.js";
+import { commentBlockElement, commentators, loader } from "./variables.js";
 
 
 export function clickEventButton() {
@@ -18,6 +18,6 @@ export function clickEventButton() {
       textInputElement.classList.add("error");
       return;
     }
-    postFunction(commentators, loader, addForm, commentBlockElement)
+    postFunction(commentators, loader, commentBlockElement)
   });
 }

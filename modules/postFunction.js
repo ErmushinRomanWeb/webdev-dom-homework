@@ -1,12 +1,13 @@
 import { getFunction } from "./getFunction.js";
 import { postComments } from "./api.js";
 
-export function postFunction(commentators, loader, addForm, clickEventButton, commentBlockElement) {
+export function postFunction(commentators, loader, clickEventButton, commentBlockElement) {
+    const addForm = document.querySelector('.add-form');
     const nameInputElement = document.getElementById("name-input");
     const textInputElement = document.getElementById("text-input");
     postComments({ name: nameInputElement.value, text: textInputElement.value }).then((responseData) => {
         commentators = responseData.comment;
-        getFunction(commentators, loader, addForm, clickEventButton, commentBlockElement);
+        getFunction(commentators, loader, clickEventButton, commentBlockElement);
     }).catch((error) => {
         console.warn(error)
         if (error.message === 'NetworkError when attempting to fetch resource.') {
@@ -19,7 +20,7 @@ export function postFunction(commentators, loader, addForm, clickEventButton, co
         };
         if (error.message === 'server fall') {
             alert('Сервер сломался, попробуй позже');
-            postFunction(commentators, loader, addForm, clickEventButton, commentBlockElement)
+            postFunction(commentators, loader, clickEventButton, commentBlockElement)
         }
     });
 };

@@ -3,11 +3,12 @@ import { likeMaker } from "./likeFunctions.js";
 import { newlikeColor } from "./likeFunctions.js";
 import { replyТoСomment } from "./replyToComments.js";
 import { clickEventButton } from "./clickEventButton.js";
-import { loginProcess, registrationProcess } from "./loginPage.js";
+// import { loginProcess, registrationProcess } from "./loginPage.js";
 
-export function formRender(loader, addForm) {
+export function formRender(loader) {
+  const addForm = document.querySelector('.add-form');
   if (loader) {
-    addForm.innerHTML = `<p>Loading...</p>`
+    addForm.innerHTML = `<p>Loading...</p>`;
   } else {
     addForm.innerHTML = `<input 
         id="name-input"
@@ -31,7 +32,8 @@ export function formRender(loader, addForm) {
   }
 }
 
-export function commentsRender(commentators, commentBlockElement) {
+export function commentsRender(commentators) {
+  const commentBlockElement = document.getElementById("comment-block");
   const commentatorsHtml = commentators.map((commentator, index) => {
     return `<li data-index="${index}" class="comment">
             <div class="comment-header">
@@ -57,9 +59,13 @@ export function commentsRender(commentators, commentBlockElement) {
 
 //ЗАДАЧА!!!: Сделать рердер комментариев:
 //Последовательность рендеров:
-//1. Рендер комментариев + страница перехода на форму входа => кнопка вход => переход
+//1. Рендер комментариев + страница перехода на форму входа => кнопка вход => переход, делай переход через addEventListner
 //2. Страница входа, меняющаяся на страницу регистрации => ввод данных || ввод данных при регистрации => переход
 //3. Страница комментариев + форма ввода комментариев
+
+// export function
+
+// export function goToLogin()
 
 export function renderLoginForm(commentators) {
   loginProcess()

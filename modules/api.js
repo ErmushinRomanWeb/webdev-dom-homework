@@ -1,10 +1,11 @@
-import { loginUrl, registrationUrl } from "./variables.js";
+import { baseUrl, loginUrl, registrationUrl } from "./variables.js";
 
 export function getComments() {
-    return fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomant/comments',
+    return fetch(baseUrl,
         {
             method: 'GET',
         }).then((response) => {
+            console.log(response);
             if (response.status != 200) {
                 throw new Error('error')
             } else {
@@ -15,7 +16,7 @@ export function getComments() {
 
 
 export function postComments({ name, text }) {
-    return fetch('https://wedev-api.sky.pro/api/v1/:ErmushinRomant/comments', {
+    return fetch(baseUrl, {
         method: 'POST',
         body: JSON.stringify({
             name: name,
@@ -37,8 +38,8 @@ export function postlogin({ login, password }) {
     return fetch (loginUrl, {
         method: 'POST',
         body: JSON.stringify({
-            login,
-            password,
+            login: 'admin',
+            password: 'admin',
         })
     }).then((response) => {
         if (response.status === 201) {

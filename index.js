@@ -1,20 +1,6 @@
-import { getFunction } from "./modules/getFunction.js";
-import { commentsRender, renderLoginForm, renderRegistrationForm } from "./modules/render.js";
-import { addForm, commentBlockElement, commentators, loader } from "./modules/variables.js";
+import { appRender } from "./appRender.js";
 
-"use strict";
-
-loader
-addForm
-commentBlockElement
-commentators
-
-getFunction(commentators, loader, addForm, commentBlockElement);
-
-renderLoginForm(commentators);
-renderRegistrationForm(commentators)
-
-commentsRender(commentators, commentBlockElement)
+appRender(false)
 
 
 //ПЛАН РАЗРАБОТКИ ФОРМЫ АВТОРИЗАЦИИ

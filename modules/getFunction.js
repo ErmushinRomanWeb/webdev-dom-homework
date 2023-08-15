@@ -1,14 +1,15 @@
 import { formRender, commentsRender } from "./render.js";
 import { getComments } from "./api.js";
 
-export function getFunction(commentators, loader, addForm, commentBlockElement) {
+export function getFunction(commentators, loader) {
+  const addForm = document.querySelector('.add-form');
   loader = true;
-  formRender(loader, addForm);
+  formRender(loader);
   getComments().then((responseData) => {
     commentators = responseData.comments;
-    commentsRender(commentators, commentBlockElement);
+    commentsRender(commentators);
     loader = false;
-    formRender(loader, addForm);
+    formRender(loader);
   }).catch((error) => {
     console.warn(error)
     // alert('Кажется у Вас пропал интернет');

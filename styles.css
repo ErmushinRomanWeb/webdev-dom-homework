@@ -23,7 +23,8 @@ body {
 
 .comment,
 .add-form,
-.login-box {
+.login-box,
+.goTologin {
   width: 596px;
   box-sizing: border-box;
   background: radial-gradient(
@@ -166,7 +167,8 @@ body {
   resize: none;
 }
 
-.login-box__link {
+.login-box__link,
+.goTologin__link  {
   font-size: 26px;
   display: block;
   font-family: Helvetica;
