@@ -1,10 +1,10 @@
 import { getFunction } from "./getFunction.js";
 import { postComments } from "./api.js";
-
+//Функция отвечает за добавление новых комментариев 
 export function postFunction(commentators, loader) {
-    // const addForm = document.querySelector('.add-form');
-    const nameInputElement = document.getElementById("name-input");
+    const nameInputElement = document.getElementById("name-input");//отрендерены ранее
     const textInputElement = document.getElementById("text-input");
+    //вызываем postComments(api.js) 
     postComments({ name: nameInputElement.value, text: textInputElement.value }).then((responseData) => {
         commentators = responseData.comment;
         getFunction(commentators, loader);

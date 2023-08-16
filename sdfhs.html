@@ -1,0 +1,17 @@
+<li data-index="${index}" class="comment">
+    <div class="comment-header">
+      <div>${commentator.author.name}</div>
+      <div>${timeFunction(new Date(commentator.date))}</div>
+    </div>
+    <div class="comment-body">
+      <div class="comment-text">
+        ${commentator.text}
+      </div>
+    </div>
+    <div class="comment-footer">
+      <div class="likes">
+        <span class="likes-counter">${commentator.likes}</span>
+        <button data-index="${index}" class="${newlikeColor(commentator.isLiked)}"></button>
+      </div>
+    </div>
+    </li>

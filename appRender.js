@@ -1,14 +1,17 @@
 import { autorisation } from "./modules/autorisation.js";
 import { getFunction } from "./modules/getFunction.js";
 import { commentsRender } from "./modules/render.js";
-import { commentators, loader } from "./modules/variables.js";
+import { commentators, loader, newIsLoginForLike } from "./modules/variables.js";
 
 "use strict";
 
-
+//Данная функция принимаетв себя переменную, которая = true or false и отрисовывает разметку внутри единственной разметки в HTML, для того, чтобы потом отрисовать туда следующую разметку
+// блок отвечает только за страницу с комментариями
 export function appRender(isLogin) {
-  const app = document.querySelector('.app');
+  newIsLoginForLike(isLogin)
+  const app = document.querySelector('.app');//Нашли единственный элемент в HTML
   if (isLogin) {
+    //Отрисовываем разметку >
     app.innerHTML = `<div class="container">
         <ul id="comment-block" class="comments">
           <!-- render -->
@@ -17,11 +20,27 @@ export function appRender(isLogin) {
           <!-- render -->
         </div>
       </div>`;
-    getFunction(commentators, loader);
+    getFunction(commentators, loader);//после того, как отрисовали разметку запускаем getFunction(смотри процесс в getFunction.js)
     commentsRender(commentators);
   } else {
-    autorisation()
+    app.innerHTML = `<div class="container">
+  <ul id="comment-block" class="comments">
+    <!-- render -->
+  </ul>
+  <div id="addFormElement" class="add-form">
+    войти в айти
+  </div>
+  <div class="start-form">Для того, чтобы войти нажми ><span id="sign-in" class="menu">Войти</span></div>
+</div>`;
+    //для того, чтобы перейти на форму авторизации надо найти sign-in и на него повесить обработчик событий
+    getFunction(commentators, loader);//после того, как отрисовали разметку запускаем getFunction(смотри процесс в getFunction.js)
+    commentsRender(commentators);//render.js
+    // autorisation()
+    const addForm = document.getElementById('addFormElement');
+    addForm.style.display = `none`;
+    const signIn = document.getElementById('sign-in');
+    signIn.addEventListener('click', () => {
+      autorisation()
+    })
   }
 }
-
-//ПО 

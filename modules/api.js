@@ -14,7 +14,7 @@ export function getComments() {
         })
 }
 
-
+//отвечает за добавление введенной нами информации на сервер, из этой информации потом получаются новые комментарии
 export function postComments({ text }) {
     console.log(token);
     return fetch(baseUrl, {

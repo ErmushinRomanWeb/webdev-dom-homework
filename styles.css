@@ -176,3 +176,21 @@ body {
   text-align: center;
 }
 
+.menu {
+  font-size: 25px;
+  transition: .3s;
+  color: #7334ea;
+}
+
+.menu:hover {
+  cursor: pointer;
+  color: #bcec30;
+
+}
+
+.start-form {
+  font-size: 25px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
