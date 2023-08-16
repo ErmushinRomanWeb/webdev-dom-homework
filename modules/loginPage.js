@@ -1,7 +1,10 @@
+import { appRender } from "../appRender.js";
 import { postRegistration, postlogin } from "./api.js";
-import { setVariables, token } from "./variables.js";
+import { newToken } from "./variables.js";
 
 //Функция выполняет: 1. Переменные, 2. Полученин промиса из postLogin, 3. Получение токена, 4. Добавление токена в свойства объекта для подписи комментария
+//Здесь подключаю данню функцию к кнопке в форме
+//Это подключить к render/renderLoginForm/ЕСТЬ
 export function loginProcess() {
     const loginButtonElement = document.getElementById('loginButton');
     const loginInputElement = document.getElementById('loginInput');
@@ -11,12 +14,14 @@ export function loginProcess() {
         postlogin({
             login: loginInputElement.value,
             password: passwordInputElement.value,
-        }).then((responseData => {
-            console.log(responseData.user.token);
-            return setVariables(token, responseData.user.token);
-        })).then((token) => {
-            console.log(token);
-        }).catch((error) => {
+        }).then((responseData) => {
+            console.log(responseData.user);
+            return newToken(responseData.user.token);
+        }).then((responseData) => {
+            responseData;
+            appRender(true)
+        }) 
+        .catch((error) => {
             if (error.message === 'wrong login or password') {
                 alert('Вы ввели некорректный логин или пароль')
             }
@@ -38,7 +43,9 @@ export function registrationProcess() {
             name: regNameInputElement.value,
             password: regpasswordInputElement.value,
         }).then((responseData) => {
-            console.log(responseData);
+            return newToken(responseData.user.token)
+        }).then((responseData) => {
+            appRender(true)
         }).catch((error) => {
             if (error.message === 'user already exists') {
                 alert('Пользователь уже существует')

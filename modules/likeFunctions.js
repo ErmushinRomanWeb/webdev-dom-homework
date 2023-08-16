@@ -1,6 +1,7 @@
 import { commentsRender } from "./render.js";
 
-export function likeMaker(commentators, commentBlockElement, replyТoСomment) {
+export function likeMaker(commentators) {
+    const commentBlockElement = document.getElementById("comment-block")
     const likeButtonElements = document.querySelectorAll('.like-button');
     likeButtonElements.forEach((likeButtonElement) => {
         likeButtonElement.addEventListener('click', (event) => {
@@ -10,11 +11,11 @@ export function likeMaker(commentators, commentBlockElement, replyТoСomment) {
             if (like.isLiked === false) {
                 like.isLiked = true;
                 like.likes += 1;
-                commentsRender(commentators, commentBlockElement, replyТoСomment)
+                commentsRender(commentators)
             } else {
                 like.isLiked = false;
                 like.likes -= 1;
-                commentsRender(commentators, commentBlockElement, replyТoСomment)
+                commentsRender(commentators)
             }
         })
     })

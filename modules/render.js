@@ -3,7 +3,6 @@ import { likeMaker } from "./likeFunctions.js";
 import { newlikeColor } from "./likeFunctions.js";
 import { replyТoСomment } from "./replyToComments.js";
 import { clickEventButton } from "./clickEventButton.js";
-// import { loginProcess, registrationProcess } from "./loginPage.js";
 
 export function formRender(loader) {
   const addForm = document.querySelector('.add-form');
@@ -33,6 +32,7 @@ export function formRender(loader) {
 }
 
 export function commentsRender(commentators) {
+  console.log(commentators);
   const commentBlockElement = document.getElementById("comment-block");
   const commentatorsHtml = commentators.map((commentator, index) => {
     return `<li data-index="${index}" class="comment">
@@ -53,7 +53,7 @@ export function commentsRender(commentators) {
             </div>`
   }).join('');
   commentBlockElement.innerHTML = commentatorsHtml;
-  likeMaker(commentators, commentBlockElement, replyТoСomment);
+  likeMaker(commentators);
   replyТoСomment(commentators);
 }
 
@@ -67,10 +67,3 @@ export function commentsRender(commentators) {
 
 // export function goToLogin()
 
-export function renderLoginForm(commentators) {
-  loginProcess()
-}
-
-export function renderRegistrationForm(commentators) {
-  registrationProcess()
-}

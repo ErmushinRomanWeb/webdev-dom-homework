@@ -1,4 +1,4 @@
-import { baseUrl, loginUrl, registrationUrl } from "./variables.js";
+import { baseUrl, loginUrl, registrationUrl, token } from "./variables.js";
 
 export function getComments() {
     return fetch(baseUrl,
@@ -15,11 +15,14 @@ export function getComments() {
 }
 
 
-export function postComments({ name, text }) {
+export function postComments({ text }) {
+    console.log(token);
     return fetch(baseUrl, {
         method: 'POST',
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
         body: JSON.stringify({
-            name: name,
             text: text,
             forceError: true,
         })
@@ -28,18 +31,21 @@ export function postComments({ name, text }) {
             throw new Error('< 2 sumb')
         } else if (response.status === 500) {
             throw new Error('server fall')
+        } else if (response.status === 401) {
+            throw new Error('unauthorized')
         } else {
+            console.log(response);
             return response.json();
         }
     })
 }
-
+//Это подключить к loginPage/loginProcess/ЕСТЬ
 export function postlogin({ login, password }) {
     return fetch (loginUrl, {
         method: 'POST',
         body: JSON.stringify({
-            login: 'admin',
-            password: 'admin',
+            login,
+            password,
         })
     }).then((response) => {
         if (response.status === 201) {
