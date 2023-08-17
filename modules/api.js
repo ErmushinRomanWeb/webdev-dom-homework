@@ -58,9 +58,9 @@ export function postlogin({ login, password }) {
     })
 }
 
-export function postRegistration({login, name, password }) {
-    return fetch (registrationUrl, {
-        method: 'POST',
+export function postRegistration({login, name, password }) {//функция будет принимать в себя логин, имя пользователя и пароль, вызывается в loginPage
+    return fetch (registrationUrl, {// сылка registrationUrl(variables) 
+        method: 'POST', //меотод добавляет в массив с пользователями информацию, которая преедана в параметрах
         body: JSON.stringify({
             login,
             name,
@@ -68,7 +68,7 @@ export function postRegistration({login, name, password }) {
         })
     }).then((response) => {
         if (response.status === 201) {
-            return response.json()
+            return response.json()//возвращаем данные о зараегистрированном пользователе в формате JSON
         } else if (response.status === 400) {
             throw new Error('user already exists')
         } else {

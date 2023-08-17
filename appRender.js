@@ -36,9 +36,9 @@ export function appRender(isLogin) {
     getFunction(commentators, loader);//после того, как отрисовали разметку запускаем getFunction(смотри процесс в getFunction.js)
     commentsRender(commentators);//render.js
     // autorisation()
-    const addForm = document.getElementById('addFormElement');
+    const addForm = document.getElementById('addFormElement');// данным действием мы убираем форму и вместо  нее ставим ссылку
     addForm.style.display = `none`;
-    const signIn = document.getElementById('sign-in');
+    const signIn = document.getElementById('sign-in');//определяем, так как разметка отрисовалась
     signIn.addEventListener('click', () => {
       autorisation()
     })

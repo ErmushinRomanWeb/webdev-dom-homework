@@ -33,7 +33,7 @@ export function loginProcess() {
 //Object { login: "dsfsd", password: "sdfsdf", name: "dvsd", … }
 //Функция выполняет: 1. Переменные, 2. получение промиса из postRegistration, 3. Добавление нового пользователя
 export function registrationProcess() {
-    const registerButtonElement = document.getElementById('registerButton');
+    const registerButtonElement = document.getElementById('registerButton'); //переменные, отрисованы 
     const regNameInputElement = document.getElementById('regNameInput')
     const regloginInputElement = document.getElementById('regLoginInput');
     const regpasswordInputElement = document.getElementById('regPasswordInput');
@@ -44,8 +44,9 @@ export function registrationProcess() {
             name: regNameInputElement.value,
             password: regpasswordInputElement.value,
         }).then((responseData) => {
+            newComName(responseData.user.name)//данным действием мы меняем значение переменной comName(variables.js) значение ключа, объекта user, которого мы только что зарегистрировали и далее используем его в formRender(render.js) для отрисовки этого в форме ввода комментария
             return newToken(responseData.user.token)
-        }).then((responseData) => {
+        }).then(() => {
             appRender(true)
         }).catch((error) => {
             if (error.message === 'user already exists') {

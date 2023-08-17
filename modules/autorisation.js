@@ -7,15 +7,14 @@ import { token } from "./variables.js";
 
 export function autorisation() {
   //это обращение к единственному элементу разметки в HTML
-  const app = document.querySelector('.app');
-  // тут меняем содержание элемента app на нашу форму авторизации, отрисовываем страницу
+  const app = document.querySelector('.app');  // тут меняем содержание элемента app на нашу форму авторизации, отрисовываем страницу
   app.innerHTML = `<div class="container"> 
     <div class="login-box"> <!-- Авторизация -->
         <h2 class="login-box__heading">Форма входа</h2>
         <input type="text" id="loginInput" placeholder="Ведите логин" class="login-box__login"> <br>
         <input type="text" id="passwordInput" placeholder="Ведите пароль" class="login-box__password"> <br>
         <button id="loginButton" class="login-box__button">Войти</button> <br>
-        <a href="" id="registrationLink" class="login-box__link">Зарегистрироваться</a>
+        <a href="#" id="registrationLink" class="login-box__link">Зарегистрироваться</a>
     </div>
     </div>`;//эта разметка аоявляется(рендер) на странице потому, что элемент app уже есть и мы, с помощью innerHTML, меняем разметку,  ТАК И РАБОТАЕТ RENDER!!!!!!!!
     console.log(app);
@@ -27,7 +26,7 @@ export function autorisation() {
   const registrationLink = document.getElementById('registrationLink');
   // добавляем обработчик события на эту ссылку, для того, чтобы при нажатии на эту ссылку у нас происходила отрисовка формы регистрации
   registrationLink.addEventListener('click', (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     app.innerHTML = `<div class="container">
         <div class="login-box">
           <!-- Регистрация -->
@@ -40,14 +39,14 @@ export function autorisation() {
             Зарегистрироваться
           </button>
           <br />
-          <a href="" id="loginLink" class="login-box__link">Войти</a>
+          <a href="#" id="loginLink" class="login-box__link">Войти</a>
         </div>
       </div>`;
       registrationProcess();
 
     const loginLink = document.getElementById('loginLink');
     loginLink.addEventListener('click', event => {
-      event.preventDefault();
+      // event.preventDefault();
       autorisation()
     })
   })
