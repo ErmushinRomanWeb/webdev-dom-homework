@@ -1,9 +1,36 @@
-let loader = false;
+export let loader = false;
 
-const addForm = document.querySelector('.add-form');
+//Задача: объявить переменные только в фонкциях, где используются
+export let commentators = [];
 
-const commentBlockElement = document.getElementById("comment-block");
+export const baseUrl = 'https://wedev-api.sky.pro/api/v2/ErmushinRomnam2/comments';
 
-let commentators = [];
+export const loginUrl = 'https://wedev-api.sky.pro/api/user/login';
 
-export { loader, addForm, commentBlockElement, commentators }
+export const registrationUrl = 'https://wedev-api.sky.pro/api/user';
+
+export let token;
+
+export function newToken(newToken) {
+    token = newToken
+}
+
+export let comName;
+
+export function newComName(newName) {
+    comName = newName
+}
+
+export let isLoginForLike 
+
+export function newIsLoginForLike (newIsLoginForLike) {
+    isLoginForLike = newIsLoginForLike
+}
+
+
+
+// export function setVariables(oldVar, newVar) {
+//     return oldVar = newVar
+// }
+
+

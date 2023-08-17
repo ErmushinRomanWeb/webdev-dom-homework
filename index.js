@@ -1,19 +1,13 @@
-import { getFunction } from "./modules/getFunction.js";
-import { commentsRender } from "./modules/render.js";
-import { addForm, commentBlockElement, commentators, loader } from "./modules/variables.js";
+import { appRender } from "./appRender.js";
 
-"use strict";
-
-loader
-addForm
-commentBlockElement
-commentators
-
-getFunction(commentators, loader, addForm, commentBlockElement);
+appRender(false)
 
 
+//ПО СУТИ ТУТ МЫ ДЕЛИМ ПРОЕКТ НА 2 ГЛОБАЛЬНЫЕ ЧАСТИ, НА ФОРМЫ И НА КОММЕНТАРИИ
 
-commentsRender(commentators, commentBlockElement)
+//План на 15,08,2023
+//1. Объявить переменные внутри функций /ЕСТЬ
 
-
-
+// 2. Включить функцию авторизации
+// 2.1. Подключить функцию получения токена к формк
+//

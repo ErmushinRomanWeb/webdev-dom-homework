@@ -22,7 +22,9 @@ body {
 }
 
 .comment,
-.add-form {
+.add-form,
+.login-box,
+.goTologin {
   width: 596px;
   box-sizing: border-box;
   background: radial-gradient(
@@ -101,8 +103,12 @@ body {
 }
 
 .add-form-name,
-.add-form-text {
-  font-size: 16px;
+.add-form-text,
+.login-box__name,
+.login-box__login,
+.login-box__password,
+.login-box__link {
+  font-size: 25px;
   font-family: Helvetica;
   border-radius: 8px;
   border: none;
@@ -124,7 +130,8 @@ body {
   justify-content: flex-end;
 }
 
-.add-form-button {
+.add-form-button,
+.login-box__button {
   margin-top: 24px;
   font-size: 24px;
   padding: 10px 20px;
@@ -140,4 +147,50 @@ body {
 
 .error{
   background: linear-gradient(to bottom, #f88040 0%, #e04040 100%);
+}
+
+.login-box {
+  padding: 20px;
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.login-box__login,
+.login-box__password,
+.login-box__name,
+.login-box__link {
+  margin-top: 12px;
+  padding: 22px;
+  resize: none;
+}
+
+.login-box__link,
+.goTologin__link  {
+  font-size: 26px;
+  display: block;
+  font-family: Helvetica;
+  color: #ffffff;
+  text-align: center;
+}
+
+.menu {
+  font-size: 25px;
+  transition: .3s;
+  color: #7334ea;
+}
+
+.menu:hover {
+  cursor: pointer;
+  color: #bcec30;
+
+}
+
+.start-form {
+  font-size: 25px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
