@@ -7,7 +7,7 @@ import { commentators, loader, newIsLoginForLike } from "./modules/variables.js"
 
 //Данная функция принимаетв себя переменную, которая = true or false и отрисовывает разметку внутри единственной разметки в HTML, для того, чтобы потом отрисовать туда следующую разметку
 // блок отвечает только за страницу с комментариями
-export function appRender(isLogin) {
+export function appRender(isLogin, loader) {
   newIsLoginForLike(isLogin)
   const app = document.querySelector('.app');//Нашли единственный элемент в HTML
   if (isLogin) {
@@ -37,7 +37,8 @@ export function appRender(isLogin) {
     commentsRender(commentators);//render.js
     // autorisation()
     const addForm = document.getElementById('addFormElement');// данным действием мы убираем форму и вместо  нее ставим ссылку
-    addForm.style.display = `none`;
+    console.log(addForm);
+    addForm.style.display = `none`;//мы обращаемся к переменной addForm, и задаем ей дисплей нон, благодаря 
     const signIn = document.getElementById('sign-in');//определяем, так как разметка отрисовалась
     signIn.addEventListener('click', () => {
       autorisation()

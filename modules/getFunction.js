@@ -1,7 +1,7 @@
 import { formRender, commentsRender } from "./render.js";
 import { getComments } from "./api.js";
 
-//Функция принимает в себя аргументы, массива и индикатора загрузки загрузки
+//Функция принимает в себя аргументы, массива и индикатора загрузки
 export function getFunction(commentators, loader) {
   loader = true;// Тут, пока страница не загрузилась, индикатор по умолчанию будет = false, и как только функция дошла до выполнения < этого кода индикатор = true появляется форма >
   formRender(loader);//Запустили formRender(смотри процесс в render.js )
