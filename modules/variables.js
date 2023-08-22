@@ -3,7 +3,7 @@ export let loader = false;
 //Задача: объявить переменные только в фонкциях, где используются
 export let commentators = [];
 
-export const baseUrl = 'https://wedev-api.sky.pro/api/v2/ErmushinRomnam3/comments';
+export const baseUrl = 'https://wedev-api.sky.pro/api/v2/ErmushinRomnam6/comments';
 
 export const loginUrl = 'https://wedev-api.sky.pro/api/user/login';
 

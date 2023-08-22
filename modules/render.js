@@ -1,9 +1,10 @@
-import { timeFunction } from "./timeFunction.js";
+// import { timeFunction } from "./timeFunction.js"
 import { likeMaker } from "./likeFunctions.js";
 import { newlikeColor } from "./likeFunctions.js";
 import { replyТoСomment } from "./replyToComments.js";
 import { clickEventButton } from "./clickEventButton.js";
 import { comName } from "./variables.js";
+import { format } from "date-fns";
 
 
 //Функция отвечает за появление формы ввода комментария, принимает в себя аргумент - loader, который является индикатором загрузки
@@ -42,10 +43,11 @@ export function commentsRender(commentators) {
   //в прееменную commentatorsHtml мы помещаем массив, который перебирается и его элементы изменяются с помощью метода map
   const commentatorsHtml = commentators.map((commentator, index) => {//с помощью метода map(работает как ф-я, но является свойством объекта и вызывается через точку), внутри которого мы задаем анонимную функцию, которая принимает аргументы элемента массива(объект) и его номер в массиве
     //Далее мы рендерим разметку комментария
+    const createDate = format(new Date(commentator.date), 'yyyy-MM-dd hh.mm.ss'); 
     return `<li data-index="${index}" class="comment">
             <div class="comment-header">
               <div>${commentator.author.name}</div>
-              <div>${timeFunction(new Date(commentator.date))}</div>
+              <div>${createDate}</div>
             </div>
             <div class="comment-body">
               <div class="comment-text">
