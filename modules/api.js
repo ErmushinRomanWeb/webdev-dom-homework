@@ -5,7 +5,6 @@ export function getComments() {
         {
             method: 'GET',
         }).then((response) => {
-            console.log(response);
             if (response.status != 200) {
                 throw new Error('error')
             } else {
