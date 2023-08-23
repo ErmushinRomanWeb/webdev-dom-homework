@@ -5,7 +5,6 @@ export function getComments() {
         {
             method: 'GET',
         }).then((response) => {
-            console.log(response);
             if (response.status != 200) {
                 throw new Error('error')
             } else {
@@ -51,10 +50,7 @@ export function postlogin({ login, password }) {
         if (response.status === 201) {
             return response.json()
         } else if (response.status === 400) {
-            throw new Error('wrong login or password')
-        } else {
-            throw new Error('Error')
-        }
+            throw new Error('wrong login or password')} 
     })
 }
 
